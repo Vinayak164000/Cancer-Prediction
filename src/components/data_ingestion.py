@@ -1,7 +1,5 @@
-from curses import raw
 import os
 import sys
-from turtle import st
 from src.exceptions import CustomExceptions
 from src.logger import logging
 import pandas as pd
