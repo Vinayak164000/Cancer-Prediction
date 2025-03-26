@@ -55,8 +55,9 @@ class DataTransformation:
             cols = ['IUD','IUD (years)','STDs','STDs (number)','STDs:condylomatosis','STDs:cervical condylomatosis',
                     'STDs:vaginal condylomatosis','STDs:vulvo-perineal condylomatosis','STDs:syphilis',
                     'STDs:pelvic inflammatory disease','STDs:genital herpes','STDs:molluscum contagiosum','STDs:AIDS',
-                    'STDs:HIV','STDs:Hepatitis B','STDs:HPV', 'STDs: Time since first diagnosis','STDs: Time since last diagnosis',
+                    'STDs:HIV','STDs:Hepatitis B','STDs:HPV','STDs: Time since first diagnosis','STDs: Time since last diagnosis',
                     'Hormonal Contraceptives (years)']
+
             for i in cols:
                 train_df.drop(i, axis = 1, inplace = True)
                 test_df.drop(i, axis = 1, inplace = True)
@@ -64,6 +65,10 @@ class DataTransformation:
 
             columns_to_transform = ['Num of pregnancies', 'Smokes', 'Smokes (years)', 'Smokes (packs/year)',
                                 'Hormonal Contraceptives','First sexual intercourse','Number of sexual partners']
+            
+            for i in columns_to_transform:
+                train_df.replace({'?': train_df[i].mode()[0]}, inplace= True)
+                test_df.replace({'?': test_df[i].mode()[0]}, inplace= True)
             target_column = 'Biopsy'
             input_feature_train_df=train_df.drop(columns=[target_column],axis=1)
             target_feature_train_df=train_df[target_column]
@@ -71,10 +76,11 @@ class DataTransformation:
             input_feature_test_df=test_df.drop(columns=[target_column],axis=1)
             target_feature_test_df=test_df[target_column]
 
-            logging.info("Applying preprcoessinf on trainig and testing dataset")
+            logging.info("Applying preprcoessing on trainig and testing dataset")
 
             train_input_feature = preprocessing_obj.fit_transform(input_feature_train_df)
             test_input_feature = preprocessing_obj.transform(input_feature_test_df)
+
 
             train_arr = np.c_[train_input_feature, np.array(target_feature_train_df)]
             test_arr = np.c_[test_input_feature, np.array(target_feature_test_df)]
