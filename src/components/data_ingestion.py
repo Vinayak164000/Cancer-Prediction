@@ -51,5 +51,5 @@ if __name__ == "__main__":
     train_arr, test_arr, _ = data_transformation.data_transform(train_data, test_data)
 
     modeltrainer = ModelTrainer()
-    accuracy = modeltrainer.train_model(train_arr, test_arr)
-    print(accuracy)
+    accuracy, best_model= modeltrainer.train_model(train_arr, test_arr)
+    print(accuracy, best_model)

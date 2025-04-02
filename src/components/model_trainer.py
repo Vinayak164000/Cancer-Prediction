@@ -37,14 +37,16 @@ class ModelTrainer:
                 test_array[:, -1]
             )
 
+            # print(X_train)
+
             models = {
                 "Random Forest": RandomForestClassifier(),
                 "Decision Tree": DecisionTreeClassifier(),
                 "Gradient Boosting": GradientBoostingClassifier(),
-                "LogisticRegression" : LogisticRegression(),
+                "LogisticRegression" : LogisticRegression(max_iter= 1000),
                 "KNeighbors": KNeighborsClassifier(),
-                "XG Boost" : XGBClassifier(),
-                "Cat Boost": CatBoostClassifier(),
+                # "XG Boost" : XGBClassifier(),
+                # "Cat Boost": CatBoostClassifier(),
                 "AdaBoost" : AdaBoostClassifier()
             }
 
@@ -66,7 +68,7 @@ class ModelTrainer:
             y_test = np.array(y_test, dtype=int)
             y_test_pred = np.array(predicted, dtype=int)
             accuracy = accuracy_score(y_test, y_test_pred)
-            return accuracy 
+            return accuracy, best_model
         
 
         except Exception as e:

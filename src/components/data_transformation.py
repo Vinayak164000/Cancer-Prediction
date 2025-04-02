@@ -36,7 +36,8 @@ class DataTransformation:
         preprocessor = ColumnTransformer(
             [
                 ('impute_pipeline', impute_pipeline, columns_to_transform)
-            ]
+            ],
+            remainder='passthrough'
         )
 
         return preprocessor
@@ -69,9 +70,22 @@ class DataTransformation:
             for i in columns_to_transform:
                 train_df.replace({'?': train_df[i].mode()[0]}, inplace= True)
                 test_df.replace({'?': test_df[i].mode()[0]}, inplace= True)
+
+            print(train_df.shape)
+
+            train_df[['Number of sexual partners','Num of pregnancies', 'First sexual intercourse', 'Smokes',
+                      'Smokes (years)','Smokes (packs/year)','Hormonal Contraceptives']] = train_df[['Number of sexual partners',
+            'Num of pregnancies', 'First sexual intercourse', 'Smokes','Smokes (years)','Smokes (packs/year)',
+            'Hormonal Contraceptives']].astype(float)
+            test_df[['Number of sexual partners','Num of pregnancies', 'First sexual intercourse', 'Smokes',
+                      'Smokes (years)','Smokes (packs/year)','Hormonal Contraceptives']] = test_df[['Number of sexual partners',
+            'Num of pregnancies', 'First sexual intercourse', 'Smokes','Smokes (years)','Smokes (packs/year)',
+            'Hormonal Contraceptives']].astype(float)
             target_column = 'Biopsy'
+            
             input_feature_train_df=train_df.drop(columns=[target_column],axis=1)
             target_feature_train_df=train_df[target_column]
+            print(input_feature_train_df.shape)
 
             input_feature_test_df=test_df.drop(columns=[target_column],axis=1)
             target_feature_test_df=test_df[target_column]
@@ -80,7 +94,7 @@ class DataTransformation:
 
             train_input_feature = preprocessing_obj.fit_transform(input_feature_train_df)
             test_input_feature = preprocessing_obj.transform(input_feature_test_df)
-
+            print(train_input_feature.shape)
 
             train_arr = np.c_[train_input_feature, np.array(target_feature_train_df)]
             test_arr = np.c_[test_input_feature, np.array(target_feature_test_df)]

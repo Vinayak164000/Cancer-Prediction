@@ -26,6 +26,9 @@ def evaluate_model(x_train, x_test, y_train, y_test, models):
             model = list(models.values())[i]
 
             y_train = y_train.astype(int) 
+            # print("Training Features:", x_train)  # Save feature names during training
+            # print("Inference Features:", list(feature_df.columns))  # Check before prediction
+
             model.fit(x_train, y_train)
 
             y_test_pred = model.predict(x_test)
@@ -42,5 +45,13 @@ def evaluate_model(x_train, x_test, y_train, y_test, models):
             
         return report
 
+    except Exception as e:
+        raise CustomExceptions(e, sys)
+    
+
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
     except Exception as e:
         raise CustomExceptions(e, sys)

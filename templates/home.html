@@ -1,0 +1,97 @@
+<html>
+    <body>
+        <div class="login">
+            <h1>Cervical Cancer Indications</h1>
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post">
+                <h1><legend>Cervical Cancer Prediction</legend></h1>
+
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input class="form-control" type="number" name="Age" placeholder="Enter Age" min='0' max='100' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Number_of_sexual_partners</label>
+                    <input class="form-control" type="number" name="Number_of_sexual_partners" placeholder="Enter number of sexual partners" min='0' max='500' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">First_sexual_intercourse</label>
+                    <input class="form-control" type="number" name="First_sexual_intercourse" placeholder="Enter age at first intercourse" min='0' max='500' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Num_of_pregnancies</label>
+                    <input class="form-control" type="number" name="Num_of_pregnancies" placeholder="Enter number of pregnancies" min='0' max='20' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Smokes</label>
+                    <input class="form-control" type="number" name="Smokes" placeholder="Do you smoke? (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Smokes_years</label>
+                    <input class="form-control" type="number" name="Smokes_years" placeholder="Years of smoking" min='0' max='500' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Smokes_packs_year</label>
+                    <input class="form-control" type="number" name="Smokes_packs_year" placeholder="Packs per year" min='0' max='200' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hormonal_Contraceptives</label>
+                    <input class="form-control" type="number" name="Hormonal_Contraceptives" placeholder="Use of hormonal contraceptives (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">STDs_Number_of_diagnosis</label>
+                    <input class="form-control" type="number" name="STDs_Number_of_diagnosis" placeholder="Number of STD diagnoses" min='0' max='5' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Dx_Cancer</label>
+                    <input class="form-control" type="number" name="Dx_Cancer" placeholder="Cancer diagnosis (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Dx_CIN</label>
+                    <input class="form-control" type="number" name="Dx_CIN" placeholder="CIN diagnosis (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Dx_HPV</label>
+                    <input class="form-control" type="number" name="Dx_HPV" placeholder="HPV diagnosis (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Dx</label>
+                    <input class="form-control" type="number" name="Dx" placeholder="General diagnosis (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hinselmann</label>
+                    <input class="form-control" type="number" name="Hinselmann" placeholder="Hinselmann test result (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Schiller</label>
+                    <input class="form-control" type="number" name="Schiller" placeholder="Schiller test result (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Citology</label>
+                    <input class="form-control" type="number" name="Citology" placeholder="Citology test result (0=No, 1=Yes)" min='0' max='1' />
+                </div>
+
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Predict Cervical Cancer Risk" required />
+                </div>
+            </form>
+
+            <h2>THE prediction is {{ results }}</h2>
+        </div>
+    </body>
+</html>
