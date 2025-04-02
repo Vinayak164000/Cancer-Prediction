@@ -26,7 +26,10 @@ class PredictPipeline:
 
             # Pass transformed features to the model (NOT the original features)
             preds = model.predict(data_scales)
-            return preds
+            if preds == 0:
+                return "Not cancer"
+            else:
+                return "cancer"
         except Exception as e:
             raise CustomExceptions(e, sys)
 
